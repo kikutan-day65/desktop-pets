@@ -27,3 +27,8 @@ walk_negative = [tk.PhotoImage(file = impath + 'move-left.gif', format = 'gif -i
 window.config(highlightbackground='black')
 window.overrideredirect(True)
 window.wm_attributes('-transparentcolor','black')
+
+# let the pet be movable and showing animation
+label = tk.Label(window, bd=0, bg='black')
+label.pack()
+window.mainloop()
