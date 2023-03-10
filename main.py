@@ -22,3 +22,8 @@ sleep = [tk.PhotoImage(file = impath + 'sleeping.gif', format = 'gif -index %i' 
 sleep_to_idle = [tk.PhotoImage(file = impath + 'wake-up.gif', format = 'gif -index %i' %(i)) for i in range(8)] # sleep to idle gif, 8 frames
 walk_positive = [tk.PhotoImage(file = impath + 'move-right.gif', format = 'gif -index %i' %(i)) for i in range(8)]  # walk to left gif, 8 frames
 walk_negative = [tk.PhotoImage(file = impath + 'move-left.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # walk to right gif, 8 frames
+
+# make black background to transparent
+window.config(highlightbackground='black')
+window.overrideredirect(True)
+window.wm_attributes('-transparentcolor','black')
