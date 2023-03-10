@@ -20,8 +20,8 @@ idle = [tk.PhotoImage(file = impath + 'idle.gif', format = 'gif -index %i' %(i))
 idle_to_sleep = [tk.PhotoImage(file = impath + 'idle-to-sleep.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # idle to sleep gif, 8 frames
 sleep = [tk.PhotoImage(file = impath + 'sleeping.gif', format = 'gif -index %i' %(i)) for i in range(3)]    # sleep gif, 3 frames
 sleep_to_idle = [tk.PhotoImage(file = impath + 'wake-up.gif', format = 'gif -index %i' %(i)) for i in range(8)] # sleep to idle gif, 8 frames
-walk_positive = [tk.PhotoImage(file = impath + 'move-right.gif', format = 'gif -index %i' %(i)) for i in range(8)]  # walk to left gif, 8 frames
-walk_negative = [tk.PhotoImage(file = impath + 'move-left.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # walk to right gif, 8 frames
+walk_positive = [tk.PhotoImage(file = impath + 'move-left.gif', format = 'gif -index %i' %(i)) for i in range(8)]  # walk to left gif, 8 frames
+walk_negative = [tk.PhotoImage(file = impath + 'move-right.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # walk to right gif, 8 frames
 
 # make black background to transparent
 window.config(highlightbackground='black')
@@ -41,3 +41,41 @@ def gif_work(cycle, frames, event_number, first_num, last_num):
         cycle = 0
         event_number = random.randrange(first_num, last_num + 1, 1)
     return cycle, event_number
+
+
+def update(cycle, check, event_number, x):
+    # idle
+    if check == 0:
+        frame = idle[cycle]
+        cycle, event_number = gif_work(cycle, idle, event_number, 1, 9)
+    
+    # idle to sleep
+    elif check == 1:
+        frame = idle_to_sleep[cycle]
+        cycle, event_number = gif_work(cycle, idle_to_sleep, event_number, 10, 10)
+    
+    # sleep
+    elif check == 2:
+        frame = sleep[cycle]
+        cycle, event_number = gif_work(cycle, sleep, event_number, 10, 15)
+    
+    # sleep to idle
+    elif check ==3:
+        frame = sleep_to_idle[cycle]
+        cycle, event_number = gif_work(cycle, sleep_to_idle, event_number, 1, 1)
+
+    # move left
+    elif check == 4:
+        frame = walk_positive[cycle]
+        cycle, event_number = gif_work(cycle, walk_positive, event_number, 1, 9)
+        x -= 3
+
+    # move right
+    elif check == 5:
+        frame = walk_negative[cycle]
+        cycle , event_number = gif_work(cycle, walk_negative, event_number, 1, 9)
+        x -= -3
+        
+    window.geometry('100x100+' + str(x) + '+1050')
+    label.configure(image=frame)
+    window.after(1, event, cycle, check, event_number, x)
