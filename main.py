@@ -14,3 +14,11 @@ impath = './images/'    # set the image path here
 
 # create a tkinter window which we are going to place our pet
 window = tk.TK()
+
+# call pet's action .gif to an array
+idle = [tk.PhotoImage(file = impath + 'idle.gif', format = 'gif -index %i' %(i)) for i in range(5)] # idle gif, 5 frames
+idle_to_sleep = [tk.PhotoImage(file = impath + 'idle-to-sleep.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # idle to sleep gif, 8 frames
+sleep = [tk.PhotoImage(file = impath + 'sleeping.gif', format = 'gif -index %i' %(i)) for i in range(3)]    # sleep gif, 3 frames
+sleep_to_idle = [tk.PhotoImage(file = impath + 'wake-up.gif', format = 'gif -index %i' %(i)) for i in range(8)] # sleep to idle gif, 8 frames
+walk_positive = [tk.PhotoImage(file = impath + 'move-right.gif', format = 'gif -index %i' %(i)) for i in range(8)]  # walk to left gif, 8 frames
+walk_negative = [tk.PhotoImage(file = impath + 'move-left.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # walk to right gif, 8 frames
