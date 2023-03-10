@@ -13,7 +13,7 @@ event_number = random.randrange(1, 3, 1)
 impath = './images/'    # set the image path here
 
 # event change
-def event(cycle,check,event_number,x):
+def event(cycle, check, event_number, x):
     if event_number in idle_num:
         check = 0
         print('idle')
@@ -44,27 +44,6 @@ def event(cycle,check,event_number,x):
         print('from sleep to idle')
         window.after(100, update, cycle, check, event_number, x) # no. 15 = sleep to idle
 
-# create a tkinter window which we are going to place our pet
-window = tk.Tk()
-
-# call pet's action .gif to an array
-idle = [tk.PhotoImage(file = impath + 'idle.gif', format = 'gif -index %i' %(i)) for i in range(5)] # idle gif, 5 frames
-idle_to_sleep = [tk.PhotoImage(file = impath + 'idle-to-sleep.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # idle to sleep gif, 8 frames
-sleep = [tk.PhotoImage(file = impath + 'sleeping.gif', format = 'gif -index %i' %(i)) for i in range(3)]    # sleep gif, 3 frames
-sleep_to_idle = [tk.PhotoImage(file = impath + 'wake-up.gif', format = 'gif -index %i' %(i)) for i in range(8)] # sleep to idle gif, 8 frames
-walk_positive = [tk.PhotoImage(file = impath + 'move-left.gif', format = 'gif -index %i' %(i)) for i in range(8)]  # walk to left gif, 8 frames
-walk_negative = [tk.PhotoImage(file = impath + 'move-right.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # walk to right gif, 8 frames
-
-# make black background to transparent
-window.config(highlightbackground='black')
-window.overrideredirect(True)
-window.wm_attributes('-transparentcolor','black')
-
-# let a pet be movable and showing animation
-label = tk.Label(window, bd=0, bg='black')
-label.pack()
-window.mainloop()
-
 # want a pet to change its action everytime the .gif have loop once
 def gif_work(cycle, frames, event_number, first_num, last_num):
     if cycle < len(frames) - 1:
@@ -73,7 +52,6 @@ def gif_work(cycle, frames, event_number, first_num, last_num):
         cycle = 0
         event_number = random.randrange(first_num, last_num + 1, 1)
     return cycle, event_number
-
 
 def update(cycle, check, event_number, x):
     # idle
@@ -111,3 +89,28 @@ def update(cycle, check, event_number, x):
     window.geometry('100x100+' + str(x) + '+1050')
     label.configure(image=frame)
     window.after(1, event, cycle, check, event_number, x)
+
+# create a tkinter window which we are going to place our pet
+window = tk.Tk()
+
+# call pet's action .gif to an array
+idle = [tk.PhotoImage(file = impath + 'idle.gif', format = 'gif -index %i' %(i)) for i in range(5)] # idle gif, 5 frames
+idle_to_sleep = [tk.PhotoImage(file = impath + 'idle-to-sleep.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # idle to sleep gif, 8 frames
+sleep = [tk.PhotoImage(file = impath + 'sleeping.gif', format = 'gif -index %i' %(i)) for i in range(3)]    # sleep gif, 3 frames
+sleep_to_idle = [tk.PhotoImage(file = impath + 'wake-up.gif', format = 'gif -index %i' %(i)) for i in range(8)] # sleep to idle gif, 8 frames
+walk_positive = [tk.PhotoImage(file = impath + 'move-left.gif', format = 'gif -index %i' %(i)) for i in range(8)]  # walk to left gif, 8 frames
+walk_negative = [tk.PhotoImage(file = impath + 'move-right.gif', format = 'gif -index %i' %(i)) for i in range(8)]   # walk to right gif, 8 frames
+
+# make black background to transparent
+window.config(highlightbackground='black')
+window.overrideredirect(True)
+window.wm_attributes('-transparentcolor','black')
+
+# let a pet be movable and showing animation
+label = tk.Label(window, bd=0, bg='black')
+label.pack()
+
+#loop the program
+window.after(1,update,cycle,check,event_number,x)
+
+window.mainloop()
