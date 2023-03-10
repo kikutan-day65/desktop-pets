@@ -13,7 +13,7 @@ event_number = random.randrange(1, 3, 1)
 impath = './images/'    # set the image path here
 
 # create a tkinter window which we are going to place our pet
-window = tk.TK()
+window = tk.Tk()
 
 # call pet's action .gif to an array
 idle = [tk.PhotoImage(file = impath + 'idle.gif', format = 'gif -index %i' %(i)) for i in range(5)] # idle gif, 5 frames
@@ -28,7 +28,16 @@ window.config(highlightbackground='black')
 window.overrideredirect(True)
 window.wm_attributes('-transparentcolor','black')
 
-# let the pet be movable and showing animation
+# let a pet be movable and showing animation
 label = tk.Label(window, bd=0, bg='black')
 label.pack()
 window.mainloop()
+
+# want a pet to change its action everytime the .gif have loop once
+def gif_work(cycle, frames, event_number, first_num, last_num):
+    if cycle < len(frames) - 1:
+        cycle += 1
+    else:
+        cycle = 0
+        event_number = random.randrange(first_num, last_num + 1, 1)
+    return cycle, event_number
