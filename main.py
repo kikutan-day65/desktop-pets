@@ -16,32 +16,32 @@ impath = './images/'    # set the image path here
 def event(cycle, check, event_number, x):
     if event_number in idle_num:
         check = 0
-        print('idle')
+        # print('idle')
         window.after(400, update, cycle, check, event_number, x) # no. 1,2,3,4 = idle
 
     elif event_number == 5:
         check = 1
-        print('from idle to sleep')
+        # print('from idle to sleep')
         window.after(100, update, cycle, check, event_number, x) # no. 5 = idle to sleep
 
     elif event_number in walk_left:
         check = 4
-        print('walking towards left')
+        # print('walking towards left')
         window.after(100, update, cycle, check, event_number, x) # no. 6,7 = walk towards left
 
     elif event_number in walk_right:
         check = 5
-        print('walking towards right')
+        # print('walking towards right')
         window.after(100, update, cycle, check, event_number, x) # no 8,9 = walk towards right
 
     elif event_number in sleep_num:
         check  = 2
-        print('sleep')
+        # print('sleep')
         window.after(1000, update, cycle, check, event_number, x) # no. 10,11,12,13,15 = sleep
 
     elif event_number == 14:
         check = 3
-        print('from sleep to idle')
+        # print('from sleep to idle')
         window.after(100, update, cycle, check, event_number, x) # no. 15 = sleep to idle
 
 # want a pet to change its action everytime the .gif have loop once
@@ -112,5 +112,13 @@ label.pack()
 
 #loop the program
 window.after(1,update,cycle,check,event_number,x)
+
+
+root = tk.Tk()
+root.geometry("500x100")
+
+root.title("exit command")
+button = tk.Button(root, text="Exit", command=lambda:window.destroy())
+button.pack()
 
 window.mainloop()
