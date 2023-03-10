@@ -1,5 +1,5 @@
 import random   # a pet is moving in random motion
-import tkinter
+import tkinter as tk
 import pyautogui
 
 x = 1400
@@ -12,3 +12,5 @@ walk_right = [8, 9]
 event_number = random.randrange(1, 3, 1)
 impath = './images/'    # set the image path here
 
+# create a tkinter window which we are going to place our pet
+window = tk.TK()
