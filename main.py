@@ -12,6 +12,38 @@ walk_right = [8, 9]
 event_number = random.randrange(1, 3, 1)
 impath = './images/'    # set the image path here
 
+# event change
+def event(cycle,check,event_number,x):
+    if event_number in idle_num:
+        check = 0
+        print('idle')
+        window.after(400, update, cycle, check, event_number, x) # no. 1,2,3,4 = idle
+
+    elif event_number == 5:
+        check = 1
+        print('from idle to sleep')
+        window.after(100, update, cycle, check, event_number, x) # no. 5 = idle to sleep
+
+    elif event_number in walk_left:
+        check = 4
+        print('walking towards left')
+        window.after(100, update, cycle, check, event_number, x) # no. 6,7 = walk towards left
+
+    elif event_number in walk_right:
+        check = 5
+        print('walking towards right')
+        window.after(100, update, cycle, check, event_number, x) # no 8,9 = walk towards right
+
+    elif event_number in sleep_num:
+        check  = 2
+        print('sleep')
+        window.after(1000, update, cycle, check, event_number, x) # no. 10,11,12,13,15 = sleep
+
+    elif event_number == 14:
+        check = 3
+        print('from sleep to idle')
+        window.after(100, update, cycle, check, event_number, x) # no. 15 = sleep to idle
+
 # create a tkinter window which we are going to place our pet
 window = tk.Tk()
 
@@ -60,7 +92,7 @@ def update(cycle, check, event_number, x):
         cycle, event_number = gif_work(cycle, sleep, event_number, 10, 15)
     
     # sleep to idle
-    elif check ==3:
+    elif check == 3:
         frame = sleep_to_idle[cycle]
         cycle, event_number = gif_work(cycle, sleep_to_idle, event_number, 1, 1)
 
